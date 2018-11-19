@@ -1,1 +1,2 @@
-Playing with socket.io
+- Playing with socket.io
+- I have not made serious restrictions, it was not the place...
