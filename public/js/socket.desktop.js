@@ -16,7 +16,12 @@ if (!searchParams.has('escritorio')) {
     $('button').on('click', function() {
 
         socket.emit('scheduleTicket', { desktop: desktop }, function(res) {
-            console.log(res);
+            var err = 'No hay tickets';
+            if (res === err) {
+                label.text(err);
+                alert(err);
+                return;
+            }
             label.text(res.number);
         });
 

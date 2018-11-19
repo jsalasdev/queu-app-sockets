@@ -10,7 +10,8 @@ io.on('connection', (client) => {
     });
 
     client.emit('state', {
-        now: ticketControl.getLastTicket()
+        now: ticketControl.getLastTicket(),
+        latestFourTickets: ticketControl.getLastFourTickets()
     });
 
     client.on('scheduleTicket', (data, callback) => {
@@ -22,6 +23,11 @@ io.on('connection', (client) => {
         }
         let scheduleTicket = ticketControl.scheduleTicket(data.desktop);
         callback(scheduleTicket);
+
+        client.broadcast.emit('latest', {
+            latestFourTickets: ticketControl.getLastFourTickets()
+        });
+
     });
 
 });
